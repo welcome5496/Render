@@ -5,30 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Government Portals</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    html, body {
+      height: 100%;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #f4f7fb;
       color: #333;
     }
+
+    .wrapper {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+    }
+
     header {
       background-color: #2e3b4e;
       color: white;
       padding: 20px 0;
       text-align: center;
     }
+
     header h1 {
       margin: 0;
       font-size: 2.5rem;
     }
+
     .portal-list {
+      flex: 1;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
       padding: 20px;
     }
+
     .portal-item {
       background-color: white;
       border-radius: 8px;
@@ -38,40 +49,55 @@
       text-align: center;
       transition: transform 0.2s ease-in-out;
     }
+
     .portal-item:hover {
       transform: scale(1.05);
     }
+
+    .portal-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
     .portal-item h3 {
       font-size: 1.5rem;
       color: #333;
     }
+
     .portal-item a {
       color: #1a73e8;
       font-size: 1rem;
       text-decoration: none;
       transition: color 0.2s ease;
+      display: inline-block;
+      margin-top: 10px;
     }
+
     .portal-item a:hover {
       color: #0056b3;
     }
+
     footer {
       background-color: #2e3b4e;
       color: white;
       text-align: center;
       padding: 15px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      height: 60px;
+      line-height: 30px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Welcome to Government Portals</h1>
-  </header>
+  <div class="wrapper">
+    <header>
+      <h1>Welcome to Government Portals</h1>
+    </header>
 
-  <div class="portal-list" id="portalList"></div>
+    <div class="portal-list" id="portalList"></div>
+  </div>
 
   <footer>
     <p>&copy; 2025 Government Portal Management. All Rights Reserved.</p>
@@ -86,8 +112,9 @@
           const div = document.createElement("div");
           div.className = "portal-item";
           div.innerHTML = `
+            <img src="${p.logo}" alt="${p.name} Logo" />
             <h3>${p.name}</h3>
-            <a href="${p.url}" target="_blank">${p.url}</a>
+            <a href="${p.url}" target="_blank">Visit Portal</a>
           `;
           container.appendChild(div);
         });
