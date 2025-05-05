@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal Viewer</title>
+</head>
+<body>
+  <h1>Government Portals</h1>
+  <div id="portalList"></div>
+
+  <script>
+    fetch("/api/portals")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("portalList");
+        data.forEach(p => {
+          const div = document.createElement("div");
+          div.innerHTML = `<strong>${p.name}</strong>: <a href="${p.url}" target="_blank">${p.url}</a>`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
