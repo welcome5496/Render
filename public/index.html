@@ -3,11 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portal Viewer</title>
+  <title>Government Portals</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fb;
+      color: #333;
+    }
+    header {
+      background-color: #2e3b4e;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .portal-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .portal-item {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+    .portal-item:hover {
+      transform: scale(1.05);
+    }
+    .portal-item h3 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .portal-item a {
+      color: #1a73e8;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .portal-item a:hover {
+      color: #0056b3;
+    }
+    footer {
+      background-color: #2e3b4e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <h1>Government Portals</h1>
-  <div id="portalList"></div>
+
+  <header>
+    <h1>Welcome to Government Portals</h1>
+  </header>
+
+  <div class="portal-list" id="portalList"></div>
+
+  <footer>
+    <p>&copy; 2025 Government Portal Management. All Rights Reserved.</p>
+  </footer>
 
   <script>
     fetch("/api/portals")
@@ -16,10 +84,15 @@
         const container = document.getElementById("portalList");
         data.forEach(p => {
           const div = document.createElement("div");
-          div.innerHTML = `<strong>${p.name}</strong>: <a href="${p.url}" target="_blank">${p.url}</a>`;
+          div.className = "portal-item";
+          div.innerHTML = `
+            <h3>${p.name}</h3>
+            <a href="${p.url}" target="_blank">${p.url}</a>
+          `;
           container.appendChild(div);
         });
       });
   </script>
+
 </body>
 </html>
